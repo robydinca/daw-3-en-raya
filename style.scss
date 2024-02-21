@@ -1,0 +1,416 @@
+body{
+  padding: 20px;
+}
+.inicio {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  h1 {
+    font-size: 2.4rem;
+    margin-bottom: 20px;
+    margin-top: 30px;
+  }
+
+  img {
+    margin-bottom: 60px;
+  }
+
+  button {
+    padding: 10px 40px;
+    border: none;
+    border-radius: 10px;
+    background-color: #f0f0f0;
+    color: #50206c;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;  
+    transition: background-color 0.3s, box-shadow 0.3s;
+    box-shadow: 6px 6px 12px #b8b8b8, 
+                -6px -6px 12px #ffffff;
+  }
+  
+  button:hover {
+    background-color: #e0e0e0;
+  }
+  
+  button:focus {
+    outline: none;
+  }
+  
+  button:active {
+    box-shadow: inset 4px 4px 8px #b8b8b8, 
+                inset -4px -4px 8px #ffffff;
+  }
+}
+
+#tablero {
+  display: grid;
+  margin: 0 auto;
+  margin-top: 5%;
+  grid-gap: 10px;
+  background-color: #fff;
+  color: #444;
+  max-width: 500px;
+  > div {
+    height: 150px;
+    border: 1px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 4em;
+    font-weight: bold;
+    border-radius: 18px;
+    background: #efefef;
+    border: none;
+    border-radius: .5rem;
+    color: #444;
+    font-weight: 700;
+    letter-spacing: .2rem;
+    text-align: center;
+    outline: none;
+    cursor: pointer;
+    transition: .2s ease-in-out;
+    box-shadow: -6px -6px 14px rgba(255, 255, 255, .7),
+                -6px -6px 10px rgba(255, 255, 255, .5),
+                6px 6px 8px rgba(255, 255, 255, .075),
+                6px 6px 10px rgba(0, 0, 0, .15);
+    &[data-libre='']:hover {
+      box-shadow: -2px -2px 6px rgba(255, 255, 255, .6),
+      -2px -2px 4px rgba(255, 255, 255, .4),
+      2px 2px 2px rgba(255, 255, 255, .05),
+      2px 2px 4px rgba(0, 0, 0, .1);
+    }
+    &[data-libre='X'], &[data-libre='O'], &[data-libre='-'] {
+      cursor: not-allowed;
+    }
+  }
+}
+
+#dimension.error:focus {
+  border-color: red;
+  outline-color: red;
+}
+
+.preGame {
+  
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  &.hide {
+    display: none;
+  }
+}
+
+#createTable {
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: #f0f0f0; /* Color de fondo */
+  color: #50206c; /* Color del texto */
+  font-size: 24px;
+  font-weight: bold;
+  width: 200px;
+  margin-left: calc(50% - 100px);
+  margin-top: 50px;
+  cursor: pointer;  
+  transition: background-color 0.3s, box-shadow 0.3s;
+  box-shadow: 6px 6px 12px #b8b8b8, 
+              -6px -6px 12px #ffffff; /* Sombra neumórfica */
+}
+
+#createTable:hover {
+  background-color: #e0e0e0; /* Color de fondo al pasar el ratón */
+}
+
+#createTable:focus {
+  outline: none; /* Eliminar el contorno al enfocar */
+}
+
+/* Estilos adicionales para un botón activo */
+#createTable:active {
+  box-shadow: inset 4px 4px 8px #b8b8b8, 
+              inset -4px -4px 8px #ffffff; /* Sombra neumórfica al hacer clic */
+}
+
+.contendorInputs{
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-left: 50%;
+  align-items: center;  
+  justify-content: baseline;
+
+  input{
+    border-radius: 50px;
+    padding: 10px;
+    box-shadow: inset 4px 4px 8px #b8b8b8, 
+              inset -4px -4px 8px #ffffff;
+              border: none;
+              outline: none
+  };
+}
+
+#resetGame, #clearTable{
+  margin-top: 20px;
+}
+
+#resetGame{
+  margin-right: 20px;
+}
+
+.clearGameButton,
+#resetGame {
+  background-color: #f0f0f0;
+  border: none;
+  border-radius: 10px;
+  padding: 12px 24px;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+
+  &:hover {
+    box-shadow: 0 9px 15px rgba(0, 0, 0, 0.2);
+    transform: translateY(-3px);
+  }
+
+  &:active {
+    transform: translateY(0);
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
+  }
+}
+
+.inGame{
+  margin-left: calc(50% - 170px);
+}
+
+#jugada{
+  overflow: scroll;
+  overflow-x: hidden;
+  height: 300px;
+  width: 600px;
+  position:absolute;
+  top: 400px;
+  padding: 20px;
+  border: 3px solid #50206c;
+  border-radius: 10px;
+  scrollbar-width: thin;
+  scrollbar-color: #50206c #f0f0f0;
+  background-color: #f0f0f0;
+  color: #50206c;
+  font-size: 18px;
+  font-weight: bold;
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.1);
+  
+}
+
+
+.inGame {
+  display: block;
+  &.hide {
+    display: none;
+  }
+}
+
+#marcador{
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+
+  ul{
+    list-style: none;
+
+    li{
+      padding: 20px;
+      background-color: #f0f0f0;
+      margin-top: 10px;
+      border-radius: 10px;
+    }
+  }
+}
+
+.clearGame {
+  display: none;
+  margin-top: 20px;
+}
+
+.hide {
+  display: none;
+}
+
+.show {
+  display: block;
+  text-align: center;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&display=swap');
+
+@mixin flexCenter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin fullCover {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+* {
+  box-sizing: border-box;
+}
+html {
+  font-size: 50px;
+  @media (max-width: 992px) {
+    font-size: 40px;
+  }
+}
+body {
+  font-size: 24px;
+  min-height: 100vh;
+  color: #333;
+  font-size: 0.3rem;
+  font-family: 'Space Grotesk', sans-serif;
+  position: relative;
+  overflow: hidden;
+}
+
+.deco {
+  @include fullCover;
+  pointer-events: none;
+  .deco-1 {
+    position: absolute;
+    top: 55%;
+    left: 65%;
+    width: 5rem;
+    height: 5rem;
+    transform: translate(-50%, -50%);
+    background-image: radial-gradient(circle at 0 0, #f4c5cd, #ffeecf);
+    border-radius: 5rem;
+    animation: deco-move 8s infinite alternate;
+    filter: blur(10px);
+  }
+  .deco-2 {
+    position: absolute;
+    top: 45%;
+    left: 40%;
+    width: 6rem;
+    height: 6rem;
+    transform: translate(-50%, -50%);
+    background-image: radial-gradient(circle at 0 0, #a1cae9, #f7c6c6);
+    border-radius: 5rem;
+    animation: deco-move 6s infinite alternate;
+    filter: blur(10px);
+  }
+  &:after {
+    content: '';
+    @include fullCover;
+    backdrop-filter: blur(50px);
+  }
+}
+
+$shadow-dark: rgba(#000, 0.3);
+$shadow-light: rgba(#fff, 0.8);
+$shadow-outer: 3px 3px 6px #{$shadow-dark}, -3px -3px 6px #{$shadow-light};
+$shadow-inner: inset 2px 2px 5px #{$shadow-dark},
+  inset -2px -2px 5px #{$shadow-light};
+
+.wrapper {
+  width: 6.5rem;
+  border-radius: 12px;
+  padding: 0.3rem 0.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  box-shadow: $shadow-outer;
+  background-color: rgba(#fff, 0.3);
+  z-index: 1;
+}
+.text {}
+
+$btn-height: 0.6rem;
+$btn-gap: 0.1rem;
+$dot-size: $btn-height - $btn-gap * 2;
+
+input#machine {
+  display: none;
+  &:checked {
+    + .button {
+      filter: none;
+      .dot {
+        left: calc(100% - #{$dot-size} - #{$btn-gap});
+        background-color: #50206c;
+      }
+    }
+  }
+}
+.button {
+  position: relative;
+  width: 1.2rem;
+  height: $btn-height;
+  border-radius: 1rem;
+  box-shadow: $shadow-inner;
+  cursor: pointer;
+  .dot {
+    position: absolute;
+    width: $dot-size;
+    height: $dot-size;
+    left: $btn-gap;
+    top: 50%;
+    transform: translateY(-50%);
+    border-radius: 50%;
+    box-shadow: $shadow-outer;
+    transition: all 0.3s;
+    background-color: #aab7d9;
+    will-change: left, background-color;
+  }
+}
+
+@keyframes deco-move {
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.5);
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  border-radius: 18px;
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}

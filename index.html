@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vite App</title>
+</head>
+
+<body>
+  <div class="inicio">
+    <h1>El Tic, el Tac y el Toe</h1>
+    <img src="./public/logo.png" alt="Tic Tac Toe" />
+    <button id="startGame">Vamo a Juga</button>
+  </div>
+
+  <div id="modal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <div class="preGame hide">
+        <div class="contendorInputs">
+          <div> <label for="dimension">Tamaño del tablero</label>
+            <input id="dimension" type="text" name="dimension">
+          </div>
+          <div> <label for="numPartidas">Número de partidas</label>
+            <input id="numPartidas" type="text" name="numPartidas">
+          </div>
+        </div>
+
+
+        <div class="wrapper">
+          <div class="text">Jugar Contra la máquina</div>
+          <input id="machine" type="checkbox" checked="checked" name="machine" />
+          <label class="button" for="machine">
+            <div class="dot"></div>
+          </label>
+        </div>
+      </div>
+      <button id="createTable">Crear tablero</button>
+    </div>
+  </div>
+  <div class="inGame hide">
+    <button id="resetGame">Reiniciar</button>
+    <button class="clearGameButton" id="clearTable">Limpiar Tablero</button>
+  </div>
+  <div id="marcador">
+  </div>
+  <div id="tablero"></div>
+  <div class="clearGame"><button class="clearGameButton">Volver a jugar</button></div>
+  <script type="module" src="/main.js"></script>
+</body>
+
+</html>
